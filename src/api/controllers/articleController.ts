@@ -14,17 +14,17 @@ const articlesGet = (req: Request, res: Response<Article[]>) => {
   res.json(articles);
 };
 
-const articleGet = (req: Request<{id: string}>, res: Response<Article>) => {
+const articleGet = (req: Request<{id: string}>, res: Response<Article>, next: NextFunction,) => {
   try {
     const article = getArticle(Number(req.params.id));
     res.json(article);
   } catch (error) {
-    throw new CustomError((error as Error).message, 404);
+    next(new CustomError((error as Error).message, 404));
   }
 };
 
 const articlePost = (
-  req: Request<unknown, unknown, Article>,
+  req: Request<unknown, unknown, Omit<Article, 'id'>>,
   res: Response<Article>,
   next: NextFunction,
 ) => {
@@ -37,7 +37,7 @@ const articlePost = (
 };
 
 const articlePut = (
-  req: Request<{id: string}, unknown, Article>,
+  req: Request<{id: string}, unknown, Omit<Article, 'id'>>,
   res: Response<Article>,
   next: NextFunction,
 ) => {
@@ -46,6 +46,7 @@ const articlePut = (
       Number(req.params.id),
       req.body.title,
       req.body.description,
+      req.body.author_id
     );
     res.json(article);
   } catch (error) {
@@ -59,7 +60,7 @@ const articleDelete = (
   next: NextFunction,
 ) => {
   try {
-    deleteArticle(Number(req.params.id));
+    deleteArticle(Number(req.params.id), Number(req.body.author_id));
     res.status(204).end();
   } catch (error) {
     next(new CustomError((error as Error).message, 500));

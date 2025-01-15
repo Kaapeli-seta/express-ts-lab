@@ -6,6 +6,16 @@ Content-Type: application/json
     "title": "Test Article",
     "description": "This is the content of article 1"
 }
+###
+POST http://localhost:3000/api/v1/authors
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Test Author",
+  "email": "adsadsd@metropolia.fi",
+}
+
 
 ### Get all articles
 GET http://localhost:3000/api/v1/articles
@@ -24,3 +34,8 @@ Content-Type: application/json
 
 ### Delete article (replace :id with actual id)
 DELETE http://localhost:3000/api/v1/articles/:id
+
+
+###
+DELETE http://localhost:3000/api/v1/authors/1
+

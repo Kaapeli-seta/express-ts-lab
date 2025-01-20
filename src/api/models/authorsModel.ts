@@ -40,9 +40,9 @@ const updateAuther = (
 };
 
 const deleteAuthor = (id: number | bigint): void => {
-  db.prepare("PRAGMA foreign_keys = OFF;").run()
+  db.prepare('DELETE FROM articles WHERE author_id = ?').run(id)
   const stmt = db.prepare("DELETE FROM authors WHERE id = ?;").run(id);
-  db.prepare("PRAGMA foreign_keys = ON;").run()
+
   if (stmt.changes === 0) {
     throw new Error('Author not found');
   }

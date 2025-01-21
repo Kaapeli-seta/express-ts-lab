@@ -25,7 +25,7 @@ const createAuthor = (author: Omit<Author, 'id'>): Author => {
   return getAuthor(stmt.lastInsertRowid);
 };
 
-const updateAuther = (
+const updateAuthor = (
   id: number | bigint,
   name: string,
   email: string,
@@ -53,6 +53,6 @@ export {
   deleteAuthor,
   getAllAuthors,
   getAuthor,
-  updateAuther,
+  updateAuthor,
 };
 

@@ -5,7 +5,7 @@ import {
   deleteAuthor,
   getAllAuthors,
   getAuthor,
-  updateAuther,
+  updateAuthor,
 } from '../models/authorsModel';
 import CustomError from '../../classes/CustomError';
 
@@ -42,7 +42,7 @@ const authorPut = (
   next: NextFunction,
 ) => {
   try {
-    const author = updateAuther(
+    const author = updateAuthor(
       Number(req.params.id),
       req.body.name,
       req.body.email,

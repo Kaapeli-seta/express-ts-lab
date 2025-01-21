@@ -55,7 +55,7 @@ const articlePut = (
 };
 
 const articleDelete = (
-  req: Request<{id: string}>,
+  req: Request<{id: string}, unknown, {author_id: string}>,
   res: Response<unknown>,
   next: NextFunction,
 ) => {
